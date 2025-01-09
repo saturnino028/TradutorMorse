@@ -30,12 +30,12 @@ enum estado_gpio
 //Escopo de função
 void InitSistema();
 
-void TecladoAlfaMorseLED(char _letra);
+void TecladoAlfaMorse(char _letra, bool L_Bn);
+
 void PontoLED(void);
 void TracoLED(void);
 void EspacoLED(void);
 
-void TecladoAlfaMorseBUZ(char _letra);
 void PontoBUZ(void);
 void TracoBUZ(void);
 void EspacoBUZ(void);
@@ -50,15 +50,15 @@ int main()
     while (true) 
     {
         printf("SOS Luminoso:\n");
-        TecladoAlfaMorseLED('S');
-        TecladoAlfaMorseLED('O');
-        TecladoAlfaMorseLED('S');
+        TecladoAlfaMorse('S', 1);
+        TecladoAlfaMorse('O', 1);
+        TecladoAlfaMorse('S', 1);
         printf("\n");
         
         printf("SOS Sonoro:\n");
-        TecladoAlfaMorseBUZ('S');
-        TecladoAlfaMorseBUZ('O');
-        TecladoAlfaMorseBUZ('S');
+        TecladoAlfaMorse('S', 0);
+        TecladoAlfaMorse('O', 0);
+        TecladoAlfaMorse('S', 0);
         printf("\n");
         sleep_ms(3000);
     }
@@ -74,201 +74,400 @@ void InitSistema()
     stdio_init_all();
 }
 
-void TecladoAlfaMorseLED(char _letra)
+void TecladoAlfaMorse(char _letra, bool L_Bn)
 {
-    switch (_letra)
+    if(L_Bn == 1)
     {
-        case 'A':
-            //.-
-            PontoLED();
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'B':
-            //-...
-            TracoLED();
-            PontoLED();
-            PontoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'C':
-            //-.-.
-            TracoLED();
-            PontoLED();
-            TracoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'D':
-            //-..
-            TracoLED();
-            PontoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'E':
-            //.
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'F':
-            //..-.
-            PontoLED();
-            PontoLED();
-            TracoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'G':
-            //--.
-            TracoLED();
-            TracoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'H':
-            //....
-            PontoLED();
-            PontoLED();
-            PontoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'I':
-            //..
-            PontoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'J':
-            //.---
-            PontoLED();
-            TracoLED();
-            TracoLED();
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'K':
-            //-.-
-            TracoLED();
-            PontoLED();
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'L':
-            //.-..
-            PontoLED();
-            TracoLED();
-            PontoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'M':
-            //--
-            TracoLED();
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'N':
-            //-.
-            TracoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'O':
-            //---
-            TracoLED();
-            TracoLED();
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'P':
-            //.--.
-            PontoLED();
-            TracoLED();
-            TracoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'Q':
-            //--.-
-            TracoLED();
-            TracoLED();
-            PontoLED();
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'R':
-            //.-.
-            PontoLED();
-            TracoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'S':
-            //...
-            PontoLED();
-            PontoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        case 'T':
-            //-
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'U':
-            //..-
-            PontoLED();
-            PontoLED();
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'V':
-            //...-
-            PontoLED();
-            PontoLED();
-            PontoLED();
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'W':
-            //.--
-            PontoLED();
-            TracoLED();
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'X':
-            //-..-
-            TracoLED();
-            PontoLED();
-            PontoLED();
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'Y':
-            //-.--
-            TracoLED();
-            PontoLED();
-            TracoLED();
-            TracoLED();
-            EspacoLED();
-            break;
-        case 'Z':
-            //--..
-            TracoLED();
-            TracoLED();
-            PontoLED();
-            PontoLED();
-            EspacoLED();
-            break;
-        default:
-            gpio_put(led_pin, high);
-            tone(buzzer_b, 1000, 3000);
-            break;
+        switch (_letra)
+        {
+            case 'A':
+                //.-
+                PontoLED();
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'B':
+                //-...
+                TracoLED();
+                PontoLED();
+                PontoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'C':
+                //-.-.
+                TracoLED();
+                PontoLED();
+                TracoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'D':
+                //-..
+                TracoLED();
+                PontoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'E':
+                //.
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'F':
+                //..-.
+                PontoLED();
+                PontoLED();
+                TracoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'G':
+                //--.
+                TracoLED();
+                TracoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'H':
+                //....
+                PontoLED();
+                PontoLED();
+                PontoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'I':
+                //..
+                PontoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'J':
+                //.---
+                PontoLED();
+                TracoLED();
+                TracoLED();
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'K':
+                //-.-
+                TracoLED();
+                PontoLED();
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'L':
+                //.-..
+                PontoLED();
+                TracoLED();
+                PontoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'M':
+                //--
+                TracoLED();
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'N':
+                //-.
+                TracoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'O':
+                //---
+                TracoLED();
+                TracoLED();
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'P':
+                //.--.
+                PontoLED();
+                TracoLED();
+                TracoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'Q':
+                //--.-
+                TracoLED();
+                TracoLED();
+                PontoLED();
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'R':
+                //.-.
+                PontoLED();
+                TracoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'S':
+                //...
+                PontoLED();
+                PontoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            case 'T':
+                //-
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'U':
+                //..-
+                PontoLED();
+                PontoLED();
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'V':
+                //...-
+                PontoLED();
+                PontoLED();
+                PontoLED();
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'W':
+                //.--
+                PontoLED();
+                TracoLED();
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'X':
+                //-..-
+                TracoLED();
+                PontoLED();
+                PontoLED();
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'Y':
+                //-.--
+                TracoLED();
+                PontoLED();
+                TracoLED();
+                TracoLED();
+                EspacoLED();
+                break;
+            case 'Z':
+                //--..
+                TracoLED();
+                TracoLED();
+                PontoLED();
+                PontoLED();
+                EspacoLED();
+                break;
+            default:
+                gpio_put(led_pin, high);
+                tone(buzzer_b, 1000, 3000);
+                break;
+            }
+    }
+    else if (L_Bn == 0)
+    {
+        switch (_letra)
+        {
+            case 'A':
+                //.-
+                PontoBUZ();
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'B':
+                //-...
+                TracoBUZ();
+                PontoBUZ();
+                PontoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'C':
+                //-.-.
+                TracoBUZ();
+                PontoBUZ();
+                TracoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'D':
+                //-..
+                TracoBUZ();
+                PontoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'E':
+                //.
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'F':
+                //..-.
+                PontoBUZ();
+                PontoBUZ();
+                TracoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'G':
+                //--.
+                TracoBUZ();
+                TracoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'H':
+                //....
+                PontoBUZ();
+                PontoBUZ();
+                PontoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'I':
+                //..
+                PontoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'J':
+                //.---
+                PontoBUZ();
+                TracoBUZ();
+                TracoBUZ();
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'K':
+                //-.-
+                TracoBUZ();
+                PontoBUZ();
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'L':
+                //.-..
+                PontoBUZ();
+                TracoBUZ();
+                PontoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'M':
+                //--
+                TracoBUZ();
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'N':
+                //-.
+                TracoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'O':
+                //---
+                TracoBUZ();
+                TracoBUZ();
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'P':
+                //.--.
+                PontoBUZ();
+                TracoBUZ();
+                TracoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'Q':
+                //--.-
+                TracoBUZ();
+                TracoBUZ();
+                PontoBUZ();
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'R':
+                //.-.
+                PontoBUZ();
+                TracoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'S':
+                //...
+                PontoBUZ();
+                PontoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            case 'T':
+                //-
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'U':
+                //..-
+                PontoBUZ();
+                PontoBUZ();
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'V':
+                //...-
+                PontoBUZ();
+                PontoBUZ();
+                PontoBUZ();
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'W':
+                //.--
+                PontoBUZ();
+                TracoBUZ();
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'X':
+                //-..-
+                TracoBUZ();
+                PontoBUZ();
+                PontoBUZ();
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'Y':
+                //-.--
+                TracoBUZ();
+                PontoBUZ();
+                TracoBUZ();
+                TracoBUZ();
+                EspacoBUZ();
+                break;
+            case 'Z':
+                //--..
+                TracoBUZ();
+                TracoBUZ();
+                PontoBUZ();
+                PontoBUZ();
+                EspacoBUZ();
+                break;
+            default:
+                gpio_put(led_pin, high);
+                gpio_put(buzzer_b, high);
+                break;
         }
+    }
 };
 
 void PontoLED()
@@ -296,203 +495,6 @@ void EspacoLED()
     //O intervalo entre letras deve ser de 0,25 segundos.
     sleep_ms(125);
 }
-
-void TecladoAlfaMorseBUZ(char _letra)
-{
-    switch (_letra)
-    {
-        case 'A':
-            //.-
-            PontoBUZ();
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'B':
-            //-...
-            TracoBUZ();
-            PontoBUZ();
-            PontoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'C':
-            //-.-.
-            TracoBUZ();
-            PontoBUZ();
-            TracoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'D':
-            //-..
-            TracoBUZ();
-            PontoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'E':
-            //.
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'F':
-            //..-.
-            PontoBUZ();
-            PontoBUZ();
-            TracoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'G':
-            //--.
-            TracoBUZ();
-            TracoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'H':
-            //....
-            PontoBUZ();
-            PontoBUZ();
-            PontoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'I':
-            //..
-            PontoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'J':
-            //.---
-            PontoBUZ();
-            TracoBUZ();
-            TracoBUZ();
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'K':
-            //-.-
-            TracoBUZ();
-            PontoBUZ();
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'L':
-            //.-..
-            PontoBUZ();
-            TracoBUZ();
-            PontoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'M':
-            //--
-            TracoBUZ();
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'N':
-            //-.
-            TracoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'O':
-            //---
-            TracoBUZ();
-            TracoBUZ();
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'P':
-            //.--.
-            PontoBUZ();
-            TracoBUZ();
-            TracoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'Q':
-            //--.-
-            TracoBUZ();
-            TracoBUZ();
-            PontoBUZ();
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'R':
-            //.-.
-            PontoBUZ();
-            TracoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'S':
-            //...
-            PontoBUZ();
-            PontoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        case 'T':
-            //-
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'U':
-            //..-
-            PontoBUZ();
-            PontoBUZ();
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'V':
-            //...-
-            PontoBUZ();
-            PontoBUZ();
-            PontoBUZ();
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'W':
-            //.--
-            PontoBUZ();
-            TracoBUZ();
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'X':
-            //-..-
-            TracoBUZ();
-            PontoBUZ();
-            PontoBUZ();
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'Y':
-            //-.--
-            TracoBUZ();
-            PontoBUZ();
-            TracoBUZ();
-            TracoBUZ();
-            EspacoBUZ();
-            break;
-        case 'Z':
-            //--..
-            TracoBUZ();
-            TracoBUZ();
-            PontoBUZ();
-            PontoBUZ();
-            EspacoBUZ();
-            break;
-        default:
-            gpio_put(led_pin, high);
-            gpio_put(buzzer_b, high);
-            break;
-        }
-};
 
 void PontoBUZ()
 {
