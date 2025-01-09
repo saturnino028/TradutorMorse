@@ -64,6 +64,9 @@ int main()
     }
 }
 
+/**
+ * @brief inicia o sistema
+ */
 void InitSistema()
 {
     gpio_init(led_pin);
@@ -74,6 +77,13 @@ void InitSistema()
     stdio_init_all();
 }
 
+/**
+ * @brief Faz a codificação de caracteres alfabeticos para Morse (dicionario)
+ * @param _letra recebe o caracter
+ * @param L_Bn sinaliza se a codificação deve ser feita com sinal luminoso ou sonoro,
+ *              0 -- Sonoro
+ *              1 -- Luminoso
+ */
 void TecladoAlfaMorse(char _letra, bool L_Bn)
 {
     if(L_Bn == 1)
@@ -470,6 +480,9 @@ void TecladoAlfaMorse(char _letra, bool L_Bn)
     }
 };
 
+/**
+ * @brief codifica um ponto em sinal luminoso
+ */
 void PontoLED()
 {
     //Um Ponto(.) é representado pelo LED aceso por 0,2 segundos.
@@ -480,6 +493,9 @@ void PontoLED()
     printf(".");
 }
 
+/**
+ * @brief codifica um traço em sinal luminoso
+ */
 void TracoLED()
 {
     //Um traço(-) é representado pelo LED aceso por 0,8 segundos.
@@ -490,12 +506,18 @@ void TracoLED()
     printf("-");
 }
 
+/**
+ * @brief implementa espaço após cada letra com sinal luminoso (somado com 125 ms anterior é igual a 250 ms)
+ */
 void EspacoLED()
 {
     //O intervalo entre letras deve ser de 0,25 segundos.
     sleep_ms(125);
 }
 
+/**
+ * @brief codifica um ponto em sinal sonoro
+ */
 void PontoBUZ()
 {
     //Um Ponto(.) é representado pelo BUZ aceso por 0,2 segundos.
@@ -504,6 +526,9 @@ void PontoBUZ()
     printf(".");
 }
 
+/**
+ * @brief codifica um traço em sinal sonoro
+ */
 void TracoBUZ()
 {
     //Um traço(-) é representado pelo BUZ aceso por 0,8 segundos.
@@ -512,12 +537,21 @@ void TracoBUZ()
     printf("-");
 }
 
+/**
+ * Implementa espaço com sinal sonoro (somado com 125 ms anterior é igual a 250 ms)
+ */
 void EspacoBUZ()
 {
     //O intervalo entre letras deve ser de 0,25 segundos.
     sleep_ms(125);
 }
 
+/**
+ * @brief gera um sinal para o buzzer
+ * @param gpio pino ao qual o buzzer está conectado
+ * @param freq frequencia do sinal
+ * @param duration_ms duração do sinal em milisegundos
+ */
 void tone(uint gpio, uint freq, uint duration_ms) 
 {
     uint period = 1000000 / freq;  // Período do sinal em microssegundos
