@@ -42,11 +42,7 @@ O sistema segue as regras do Código Morse, respeitando intervalos de tempo espe
   - `pico/stdlib.h` para controle GPIO e temporização.
 
 ## Como Usar
-1. **Clone o repositório do projeto:**
-
-git clone https://github.com/saturnino028/TradutorMorse.git
-2. **Import o projeto usando a extensão do Raspberry Pi Pico:**
-
-clique em import project e selecione o diretorio que foi clonado
-3. **Compile o código**
-4. **Se tiver com todas as extensões instaladas (Wokwi), basta clicar no diagram.json**
+1. **Clone o repositório do projeto:** git clone https://github.com/saturnino028/TradutorMorse.git
+2. **Import o projeto usando a extensão do Raspberry Pi Pico:** Clique em "import project" e selecione o diretório que foi clonado.
+3. **Compile o código.**
+4. **Se tiver todas as extensões instaladas (Wokwi):** Basta clicar no arquivo diagram.json.
