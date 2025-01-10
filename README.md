@@ -43,6 +43,8 @@ O sistema segue as regras do Código Morse, respeitando intervalos de tempo espe
 
 ## Como Usar
 1. Clone o repositório do projeto:
+   
    git clone https://github.com/saturnino028/TradutorMorse.git
-2. Import o projeto usando a extensão do Raspberry Pi Pico
+3. Import o projeto usando a extensão do Raspberry Pi Pico
+   
    clique em import project e selecione o diretorio que foi clonado
